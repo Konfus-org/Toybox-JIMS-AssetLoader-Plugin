@@ -1,10 +1,10 @@
-project "SDL3 Input"
+project "JIM Asset Loader"
     kind "SharedLib"
     language "C++"
     cppdialect "C++20"
     staticruntime "Off"
 
-    RegisterDynamicPlugin("SDL3 Input")
+    RegisterDynamicPlugin("JIM Asset Loader")
 
     files
     {
@@ -18,9 +18,7 @@ project "SDL3 Input"
     includedirs
     {
         "./Source",
-        _MAIN_SCRIPT_DIR .. "/Dependencies/SDL3/include"
     }
     links
     {
-        "SDL3"
     }
