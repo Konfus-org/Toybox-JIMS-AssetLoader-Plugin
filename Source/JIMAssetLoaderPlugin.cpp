@@ -20,15 +20,15 @@ namespace JIM
     std::shared_ptr<Tbx::Texture> JIMAssetLoaderPlugin::LoadTexture(const std::string& filepath)
     {
         // Load texture with stbimg
-		int width, height, channels;
-		stbi_set_flip_vertically_on_load(1);
-		stbi_uc* data = stbi_load(filepath.c_str(), &width, &height, &channels, 0);
-		
+        int width, height, channels;
+        stbi_set_flip_vertically_on_load(1);
+        stbi_uc* data = stbi_load(filepath.c_str(), &width, &height, &channels, 0);
+        
         // Ensure texture loaded correctly
         if (!data)
         {
             TBX_ASSERT(false, "Failed to load texture file at {}!", filepath);
-            return {};
+            return std::shared_ptr<Tbx::Texture>(new Tbx::Texture(), [this](Tbx::Texture* texture) { DeleteTexture(texture); });
         }
 
         // Allocate and copy into vector
@@ -53,7 +53,7 @@ namespace JIM
         if (shaderSource.empty())
         {
             TBX_ASSERT(false, "Failed to load shader file at {}!", filepath);
-            return {};
+            return std::shared_ptr<Tbx::Shader>(new Tbx::Shader(), [this](Tbx::Shader* shader) { DeleteShader(shader); });
         }
 
         // Create tbx in memory shader and return it
