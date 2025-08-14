@@ -18,7 +18,11 @@ project "JIM Asset Loader"
     includedirs
     {
         "./Source",
+        _MAIN_SCRIPT_DIR .. "/Dependencies/nlohmann_json/include",
+        _MAIN_SCRIPT_DIR .. "/Dependencies/stbimg/include",
     }
     links
     {
+        "stbimg",
+        "nlohmann_json",
     }

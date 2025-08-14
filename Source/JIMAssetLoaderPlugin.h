@@ -12,8 +12,13 @@ namespace JIM
         void OnLoad() override;
         void OnUnload() override;
 
-        Tbx::Texture LoadTexture(const std::string& filename) override;
-        Tbx::Shader LoadShader(const std::string& filename) override;
+        std::shared_ptr<Tbx::Texture> LoadTexture(const std::string& filepath) override;
+        std::shared_ptr<Tbx::Shader> LoadShader(const std::string& filepath) override;
+
+        std::string LoadTextFile(const std::string& filepath);
+
+        void DeleteTexture(Tbx::Texture* texture);
+        void DeleteShader(Tbx::Shader* shader);
     };
 
     TBX_REGISTER_PLUGIN(JIMAssetLoaderPlugin);

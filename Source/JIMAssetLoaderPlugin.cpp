@@ -1,4 +1,9 @@
 #include "JIMAssetLoaderPlugin.h"
+#include <Tbx/Debug/Debugging.h>
+#include <stb_image.h>
+#include <fstream>
+#include <sstream>
+#include <iostream>
 
 namespace JIM
 {
@@ -12,13 +17,71 @@ namespace JIM
         // Do nothing
     }
 
-    Tbx::Texture JIMAssetLoaderPlugin::LoadTexture(const std::string& filename)
+    std::shared_ptr<Tbx::Texture> JIMAssetLoaderPlugin::LoadTexture(const std::string& filepath)
     {
-        return Tbx::Texture();
+        // Load texture with stbimg
+		int width, height, channels;
+		stbi_set_flip_vertically_on_load(1);
+		stbi_uc* data = stbi_load(filepath.c_str(), &width, &height, &channels, 0);
+		
+        // Ensure texture loaded correctly
+        if (!data)
+        {
+            TBX_ASSERT(false, "Failed to load texture file at {}!", filepath);
+            return {};
+        }
+
+        // Allocate and copy into vector
+        size_t dataSize = static_cast<size_t>(width) * height * channels;
+        std::vector<unsigned char> pixelData(dataSize);
+        std::memcpy(pixelData.data(), data, dataSize);
+
+        // Create tbx in memory texture and return it
+        auto* texture = new Tbx::Texture(
+            Tbx::Size(width, height),
+            Tbx::TextureWrap::Repeat,
+            Tbx::TextureFilter::Linear,
+            channels == 4 ? Tbx::TextureFormat::RGBA : Tbx::TextureFormat::RGB,
+            pixelData);
+        return std::shared_ptr<Tbx::Texture>(texture, [this](Tbx::Texture* texture) { DeleteTexture(texture); });
     }
 
-    Tbx::Shader JIMAssetLoaderPlugin::LoadShader(const std::string& filename)
+    std::shared_ptr<Tbx::Shader> JIMAssetLoaderPlugin::LoadShader(const std::string& filepath)
     {
-        return Tbx::Shader();
+        // Load and validate shader
+        auto shaderSource = LoadTextFile(filepath);
+        if (shaderSource.empty())
+        {
+            TBX_ASSERT(false, "Failed to load shader file at {}!", filepath);
+            return {};
+        }
+
+        // Create tbx in memory shader and return it
+        auto* shader = new Tbx::Shader(shaderSource, std::filesystem::path(filepath).extension() == ".vert" ? Tbx::ShaderType::Vertex : Tbx::ShaderType::Fragment);
+        return std::shared_ptr<Tbx::Shader>(shader, [this](Tbx::Shader* shader) { DeleteShader(shader); });
+    }
+
+    std::string JIMAssetLoaderPlugin::LoadTextFile(const std::string& filepath)
+    {
+        auto file = std::ifstream(filepath, std::ios::in | std::ios::binary);
+        if (!file)
+        {
+            TBX_ASSERT(false, "Failed to load text file at {}!", filepath);
+            return {};
+        }
+
+        std::ostringstream contents;
+        contents << file.rdbuf(); // read entire file into string stream
+        return contents.str();    // convert to std::string
+    }
+
+    void JIMAssetLoaderPlugin::DeleteTexture(Tbx::Texture* texture)
+    {
+        delete texture;
+    }
+
+    void JIMAssetLoaderPlugin::DeleteShader(Tbx::Shader* shader)
+    {
+        delete shader;
     }
 }
