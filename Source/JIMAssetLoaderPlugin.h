@@ -1,5 +1,5 @@
 #pragma once
-#include "Tbx/PluginAPI/RegisterPlugin.h"
+#include <Tbx/PluginAPI/RegisterPlugin.h>
 
 namespace JIM
 {
