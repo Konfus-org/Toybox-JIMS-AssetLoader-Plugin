@@ -39,8 +39,6 @@ namespace JIM
         // Create tbx in memory texture and return it
         auto* texture = new Tbx::Texture(
             Tbx::Size(width, height),
-            Tbx::TextureWrap::Repeat,
-            Tbx::TextureFilter::Linear,
             channels == 4 ? Tbx::TextureFormat::RGBA : Tbx::TextureFormat::RGB,
             pixelData);
         return std::shared_ptr<Tbx::Texture>(texture, [this](Tbx::Texture* texture) { DeleteTexture(texture); });
