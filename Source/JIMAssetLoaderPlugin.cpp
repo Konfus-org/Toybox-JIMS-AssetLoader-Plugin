@@ -41,6 +41,10 @@ namespace JIM
             Tbx::Size(width, height),
             channels == 4 ? Tbx::TextureFormat::RGBA : Tbx::TextureFormat::RGB,
             pixelData);
+
+        // Free the stb data
+        stbi_image_free(data);
+
         return std::shared_ptr<Tbx::Texture>(texture, [this](Tbx::Texture* texture) { DeleteTexture(texture); });
     }
 
@@ -67,10 +71,12 @@ namespace JIM
             TBX_ASSERT(false, "Failed to load text file at {}!", filepath);
             return {};
         }
-
+        
         std::ostringstream contents;
-        contents << file.rdbuf(); // read entire file into string stream
-        return contents.str();    // convert to std::string
+        contents << file.rdbuf(); 
+        file.close();
+
+        return contents.str();
     }
 
     void JIMAssetLoaderPlugin::DeleteTexture(Tbx::Texture* texture)
