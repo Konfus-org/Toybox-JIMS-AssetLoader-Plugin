@@ -1,9 +1,0 @@
-{
-    "name": "JIM Asset Loader",
-    "lib": "JIM Asset Loader.dll",
-    "priority": "0",
-    "language": "C++",
-    "version": "0.0.1",
-    "author": "Konfus-dev",
-    "description": "Plugin to handle loading all asset types supported by Toybox via the assimp, stbimg, and nlohmann_json. JIM stands for Json, Image, Model."
-}

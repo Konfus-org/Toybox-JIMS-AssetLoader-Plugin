@@ -1,0 +1,14 @@
+{
+    "name": "JSIM Asset Loader",
+    "lib": "JSIM Asset Loader.dll",
+    "language": "C++",
+    "version": "0.0.1",
+    "type": [
+        "Json Asset Loader",
+        "Texture Asset Loader",
+        "Shader Asset Loader",
+        "Model Asset Loader"
+    ],
+    "author": "Konfus-dev",
+    "description": "Plugin to handle loading all asset types supported by Toybox via the assimp, stbimg, and nlohmann_json. JSIM stands for Json, Shader, Image, Model."
+}

@@ -1,10 +1,10 @@
-project "JIM Asset Loader"
+project "JSIM Asset Loader"
     kind "SharedLib"
     language "C++"
     cppdialect "C++20"
     staticruntime "Off"
 
-    RegisterDynamicPlugin("JIM Asset Loader")
+    RegisterDynamicPlugin("JSIM Asset Loader")
 
     files
     {
