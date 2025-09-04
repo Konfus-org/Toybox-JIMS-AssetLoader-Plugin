@@ -1,6 +1,6 @@
 {
-    "name": "JSIM Asset Loader",
-    "lib": "JSIM Asset Loader.dll",
+    "name": "JIMS Asset Loader",
+    "lib": "JIMSAssetLoader.dll",
     "language": "C++",
     "version": "0.0.1",
     "type": [
