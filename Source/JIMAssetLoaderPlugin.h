@@ -1,16 +1,13 @@
 #pragma once
-#include <Tbx/PluginAPI/RegisterPlugin.h>
+#include <Tbx/Plugins/Plugin.h>
+#include <Tbx/Assets/AssetLoaders.h>
 
 namespace JIM
 {
-    class JIMAssetLoaderPlugin : public Tbx::ITextureLoaderPlugin, public Tbx::IShaderLoaderPlugin
+    class JIMAssetLoaderPlugin : public Tbx::ITextureLoader, public Tbx::IShaderLoader, public Tbx::Plugin
     {
     public:
-        JIMAssetLoaderPlugin() = default;
-        ~JIMAssetLoaderPlugin() override = default;
-
-        void OnLoad() override;
-        void OnUnload() override;
+        JIMAssetLoaderPlugin(const std::weak_ptr<Tbx::App>& app) {}
 
         std::shared_ptr<Tbx::Texture> LoadTexture(const std::string& filepath) override;
         std::shared_ptr<Tbx::Shader> LoadShader(const std::string& filepath) override;

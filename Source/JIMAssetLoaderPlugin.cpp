@@ -8,16 +8,6 @@
 
 namespace JIM
 {
-    void JIMAssetLoaderPlugin::OnLoad()
-    {
-        // Do nothing
-    }
-
-    void JIMAssetLoaderPlugin::OnUnload()
-    {
-        // Do nothing
-    }
-
     std::shared_ptr<Tbx::Texture> JIMAssetLoaderPlugin::LoadTexture(const std::string& filepath)
     {
         // Load texture with stbimg
