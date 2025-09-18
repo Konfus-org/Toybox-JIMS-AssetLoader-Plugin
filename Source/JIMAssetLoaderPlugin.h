@@ -2,21 +2,21 @@
 #include <Tbx/Plugins/Plugin.h>
 #include <Tbx/Assets/AssetLoaders.h>
 
-namespace JIM
+namespace JIMS
 {
-    class JIMAssetLoaderPlugin : public Tbx::ITextureLoader, public Tbx::IShaderLoader, public Tbx::Plugin
+    class JIMSAssetLoaderPlugin 
+        : public Tbx::ITextureLoader
+        , public Tbx::IShaderLoader
+        , public Tbx::ITextLoader
+        , public Tbx::Plugin
     {
     public:
-        JIMAssetLoaderPlugin(const std::weak_ptr<Tbx::App>& app) {}
-
-        std::shared_ptr<Tbx::Texture> LoadTexture(const std::string& filepath) override;
-        std::shared_ptr<Tbx::Shader> LoadShader(const std::string& filepath) override;
-
-        std::string LoadTextFile(const std::string& filepath);
-
-        void DeleteTexture(Tbx::Texture* texture);
-        void DeleteShader(Tbx::Shader* shader);
+        JIMSAssetLoaderPlugin(const std::weak_ptr<Tbx::App>& app) {}
+        bool CanLoad(const std::filesystem::path& filepath) const final;
+        Tbx::Texture LoadTexture(const std::filesystem::path& filepath) final;
+        Tbx::Shader LoadShader(const std::filesystem::path& filepath) final;
+        Tbx::Text LoadText(const std::filesystem::path& filepath) final;
     };
 
-    TBX_REGISTER_PLUGIN(JIMAssetLoaderPlugin);
+    TBX_REGISTER_PLUGIN(JIMSAssetLoaderPlugin);
 }
