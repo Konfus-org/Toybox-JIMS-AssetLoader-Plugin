@@ -46,6 +46,8 @@ namespace JIMS
         // Create tbx in memory texture and return it
         auto texture = Tbx::Texture(
             Tbx::Size(width, height),
+            Tbx::TextureWrap::Repeat,
+            Tbx::TextureFilter::Nearest,
             channels == 4 ? Tbx::TextureFormat::RGBA : Tbx::TextureFormat::RGB,
             pixelData);
 
