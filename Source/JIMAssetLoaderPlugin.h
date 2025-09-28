@@ -4,14 +4,14 @@
 
 namespace JIMS
 {
-    class JIMSAssetLoaderPlugin
+    class JIMSAssetLoaderPlugin final
         : public Tbx::Plugin
         , public Tbx::ITextureLoader
         , public Tbx::IShaderLoader
         , public Tbx::ITextLoader
     {
     public:
-        JIMSAssetLoaderPlugin(std::weak_ptr<Tbx::App> app) {}
+        JIMSAssetLoaderPlugin(std::weak_ptr<Tbx::App> app) : Tbx::Plugin(app) {}
         bool CanLoad(const std::filesystem::path& filepath) const final;
         Tbx::Texture LoadTexture(const std::filesystem::path& filepath) final;
         Tbx::Shader LoadShader(const std::filesystem::path& filepath) final;

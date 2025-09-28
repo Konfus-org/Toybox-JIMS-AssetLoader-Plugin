@@ -34,7 +34,7 @@ namespace JIMS
         // Ensure texture loaded correctly
         if (!data)
         {
-            TBX_ASSERT(false, "Failed to load texture file at {}!", filepath.string());
+            TBX_ASSERT(false, "JIMS: Failed to load texture file at {}!", filepath.string());
             return Tbx::Texture();
         }
 
@@ -71,7 +71,7 @@ namespace JIMS
         }
         else
         {
-            TBX_ASSERT(false, "Invalid shader file extension at {}!", filepath.string());
+            TBX_ASSERT(false, "JIMS: Invalid shader file extension at {}!", filepath.string());
             return Tbx::Shader();
         }
 
@@ -79,7 +79,7 @@ namespace JIMS
         auto shaderSource = LoadText(filepath);
         if (shaderSource.Value.empty())
         {
-            TBX_ASSERT(false, "Failed to load shader file at {}!", filepath.string());
+            TBX_ASSERT(false, "JIMS: Failed to load shader file at {}!", filepath.string());
             return Tbx::Shader();
         }
 
@@ -93,7 +93,7 @@ namespace JIMS
         auto file = std::ifstream(filepath, std::ios::in | std::ios::binary);
         if (!file)
         {
-            TBX_ASSERT(false, "Failed to load text file at {}!", filepath.string());
+            TBX_ASSERT(false, "JIMS: Failed to load text file at {}!", filepath.string());
             return {};
         }
 
