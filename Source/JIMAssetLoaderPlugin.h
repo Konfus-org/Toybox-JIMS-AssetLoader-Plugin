@@ -5,7 +5,7 @@
 namespace JIMS
 {
     class JIMSAssetLoaderPlugin final
-        : public Tbx::IPlugin
+        : public Tbx::Plugin
         , public Tbx::ITextureLoader
         , public Tbx::IShaderLoader
         , public Tbx::ITextLoader

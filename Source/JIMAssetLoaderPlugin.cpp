@@ -1,5 +1,5 @@
 #include "JIMAssetLoaderPlugin.h"
-#include <Tbx/Debug/Debugging.h>
+#include <Tbx/Debug/Tracers.h>
 #include <stb_image.h>
 #include <fstream>
 #include <sstream>
