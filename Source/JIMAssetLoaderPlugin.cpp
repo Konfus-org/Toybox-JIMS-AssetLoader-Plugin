@@ -6,7 +6,7 @@
 #include <iostream>
 #include <cstring>
 
-namespace JIMS
+namespace Tbx::Plugins::JIMS
 {
     /////////////// LOADER /////////////////////
 
@@ -24,7 +24,7 @@ namespace JIMS
         return false;
     }
 
-    Tbx::Texture JIMSAssetLoaderPlugin::LoadTexture(const std::filesystem::path& filepath)
+    Texture JIMSAssetLoaderPlugin::LoadTexture(const std::filesystem::path& filepath)
     {
         // Load texture with stbimg
         int width, height, channels;
@@ -35,7 +35,7 @@ namespace JIMS
         if (!data)
         {
             TBX_ASSERT(false, "JIMS: Failed to load texture file at {}!", filepath.string());
-            return Tbx::Texture();
+            return Texture();
         }
 
         // Allocate and copy into vector
@@ -44,11 +44,11 @@ namespace JIMS
         std::memcpy(pixelData.data(), data, dataSize);
 
         // Create tbx in memory texture and return it
-        auto texture = Tbx::Texture(
-            Tbx::Size(width, height),
-            Tbx::TextureWrap::Repeat,
-            Tbx::TextureFilter::Nearest,
-            channels == 4 ? Tbx::TextureFormat::RGBA : Tbx::TextureFormat::RGB,
+        auto texture = Texture(
+            Size(width, height),
+            TextureWrap::Repeat,
+            TextureFilter::Nearest,
+            channels == 4 ? TextureFormat::RGBA : TextureFormat::RGB,
             pixelData);
 
         // Free the stb data
@@ -57,22 +57,22 @@ namespace JIMS
         return texture;
     }
 
-    Tbx::Shader JIMSAssetLoaderPlugin::LoadShader(const std::filesystem::path& filepath)
+    Shader JIMSAssetLoaderPlugin::LoadShader(const std::filesystem::path& filepath)
     {
         // Get shader type from extension
-        Tbx::ShaderType shaderType;
+        ShaderType shaderType;
         if (filepath.extension() == ".vert")
         {
-            shaderType = Tbx::ShaderType::Vertex;
+            shaderType = ShaderType::Vertex;
         }
         else if (filepath.extension() == ".frag")
         {
-            shaderType = Tbx::ShaderType::Fragment;
+            shaderType = ShaderType::Fragment;
         }
         else
         {
             TBX_ASSERT(false, "JIMS: Invalid shader file extension at {}!", filepath.string());
-            return Tbx::Shader();
+            return Shader();
         }
 
         // Load and validate shader
@@ -80,15 +80,15 @@ namespace JIMS
         if (shaderSource.Value.empty())
         {
             TBX_ASSERT(false, "JIMS: Failed to load shader file at {}!", filepath.string());
-            return Tbx::Shader();
+            return Shader();
         }
 
         // Create tbx in memory shader and return it
-        auto shader = Tbx::Shader(shaderSource.Value, shaderType);
+        auto shader = Shader(shaderSource.Value, shaderType);
         return shader;
     }
 
-    Tbx::Text JIMSAssetLoaderPlugin::LoadText(const std::filesystem::path& filepath)
+    Text JIMSAssetLoaderPlugin::LoadText(const std::filesystem::path& filepath)
     {
         auto file = std::ifstream(filepath, std::ios::in | std::ios::binary);
         if (!file)
@@ -101,6 +101,6 @@ namespace JIMS
         contents << file.rdbuf();
         file.close();
 
-        return Tbx::Text(contents.str());
+        return Text(contents.str());
     }
 }

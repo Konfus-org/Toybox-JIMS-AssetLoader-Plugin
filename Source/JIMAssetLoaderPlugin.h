@@ -2,21 +2,21 @@
 #include <Tbx/Plugins/Plugin.h>
 #include <Tbx/Assets/AssetLoaders.h>
 
-namespace JIMS
+namespace Tbx::Plugins::JIMS
 {
     class JIMSAssetLoaderPlugin final
-        : public Tbx::Plugin
-        , public Tbx::ITextureLoader
-        , public Tbx::IShaderLoader
-        , public Tbx::ITextLoader
+        : public Plugin
+        , public ITextureLoader
+        , public IShaderLoader
+        , public ITextLoader
     {
     public:
-        JIMSAssetLoaderPlugin(Tbx::Ref<Tbx::EventBus> eventBus) {}
+        JIMSAssetLoaderPlugin(Ref<EventBus> eventBus) {}
 
         bool CanLoad(const std::filesystem::path& filepath) const final;
-        Tbx::Texture LoadTexture(const std::filesystem::path& filepath) final;
-        Tbx::Shader LoadShader(const std::filesystem::path& filepath) final;
-        Tbx::Text LoadText(const std::filesystem::path& filepath) final;
+        Texture LoadTexture(const std::filesystem::path& filepath) final;
+        Shader LoadShader(const std::filesystem::path& filepath) final;
+        Text LoadText(const std::filesystem::path& filepath) final;
     };
 
     TBX_REGISTER_PLUGIN(JIMSAssetLoaderPlugin);
