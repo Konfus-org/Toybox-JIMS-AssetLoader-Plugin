@@ -1,6 +1,6 @@
 #pragma once
-#include <Tbx/Plugins/Plugin.h>
-#include <Tbx/Assets/AssetLoaders.h>
+#include "Tbx/Plugins/Plugin.h"
+#include "Tbx/Assets/AssetLoaders.h"
 
 namespace Tbx::Plugins::JIMS
 {
