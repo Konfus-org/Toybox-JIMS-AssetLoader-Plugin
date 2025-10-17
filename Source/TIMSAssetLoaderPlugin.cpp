@@ -1,4 +1,4 @@
-#include "JIMAssetLoaderPlugin.h"
+#include "TIMSAssetLoaderPlugin.h"
 #include "Tbx/Debug/Asserts.h"
 #include <stb_image.h>
 #include <fstream>
@@ -10,7 +10,7 @@ namespace Tbx::Plugins::JIMS
 {
     /////////////// LOADER /////////////////////
 
-    bool JIMSAssetLoaderPlugin::CanLoad(const std::filesystem::path& filepath) const
+    bool TIMSAssetLoaderPlugin::CanLoad(const std::filesystem::path& filepath) const
     {
         if (filepath.extension() == ".png" ||
             filepath.extension() == ".jpg" ||
@@ -24,7 +24,7 @@ namespace Tbx::Plugins::JIMS
         return false;
     }
 
-    Texture JIMSAssetLoaderPlugin::LoadTexture(const std::filesystem::path& filepath)
+    Ref<Texture> TIMSAssetLoaderPlugin::LoadTexture(const std::filesystem::path& filepath)
     {
         // Load texture with stbimg
         int width, height, channels;
@@ -35,7 +35,7 @@ namespace Tbx::Plugins::JIMS
         if (!data)
         {
             TBX_ASSERT(false, "JIMS: Failed to load texture file at {}!", filepath.string());
-            return Texture();
+            return nullptr;
         }
 
         // Allocate and copy into vector
@@ -44,7 +44,7 @@ namespace Tbx::Plugins::JIMS
         std::memcpy(pixelData.data(), data, dataSize);
 
         // Create tbx in memory texture and return it
-        auto texture = Texture(
+        auto texture = FactoryPlugin<TIMSTexture>::Produce(
             Size(width, height),
             TextureWrap::Repeat,
             TextureFilter::Nearest,
@@ -57,7 +57,7 @@ namespace Tbx::Plugins::JIMS
         return texture;
     }
 
-    Shader JIMSAssetLoaderPlugin::LoadShader(const std::filesystem::path& filepath)
+    Ref<Shader> TIMSAssetLoaderPlugin::LoadShader(const std::filesystem::path& filepath)
     {
         // Get shader type from extension
         ShaderType shaderType;
@@ -72,23 +72,23 @@ namespace Tbx::Plugins::JIMS
         else
         {
             TBX_ASSERT(false, "JIMS: Invalid shader file extension at {}!", filepath.string());
-            return Shader();
+            return nullptr;
         }
 
         // Load and validate shader
         auto shaderSource = LoadText(filepath);
-        if (shaderSource.Value.empty())
+        if (shaderSource->Value.empty())
         {
             TBX_ASSERT(false, "JIMS: Failed to load shader file at {}!", filepath.string());
-            return Shader();
+            return nullptr;
         }
 
         // Create tbx in memory shader and return it
-        auto shader = Shader(shaderSource.Value, shaderType);
+        auto shader = FactoryPlugin<TIMSShader>::Produce(shaderSource->Value, shaderType);
         return shader;
     }
 
-    Text JIMSAssetLoaderPlugin::LoadText(const std::filesystem::path& filepath)
+    Ref<Text> TIMSAssetLoaderPlugin::LoadText(const std::filesystem::path& filepath)
     {
         auto file = std::ifstream(filepath, std::ios::in | std::ios::binary);
         if (!file)
@@ -101,6 +101,6 @@ namespace Tbx::Plugins::JIMS
         contents << file.rdbuf();
         file.close();
 
-        return Text(contents.str());
+        return FactoryPlugin<TIMSText>::Produce(contents.str(), "None", 12);
     }
 }

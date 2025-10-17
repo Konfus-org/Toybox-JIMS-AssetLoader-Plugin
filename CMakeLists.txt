@@ -1,4 +1,4 @@
-set(LibName JIMSAssetLoader)
+set(LibName TIMSAssetLoader)
 add_library(${LibName} SHARED)
 
 # Sources

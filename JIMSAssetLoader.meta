@@ -1,7 +1,0 @@
-{
-    "name": "JIMS Asset Loader",
-    "language": "C++",
-    "version": "0.0.1",
-    "author": "Konfus-dev",
-    "description": "Plugin to handle loading all asset types supported by Toybox via the assimp, stbimg, and nlohmann_json. JIMS stands for Json, Image, Model, Shader. TODO: still need to implement model loading..."
-}
