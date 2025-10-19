@@ -10,14 +10,14 @@ namespace Tbx::Plugins::JIMS
 {
     /////////////// LOADER /////////////////////
 
-    bool TIMSAssetLoaderPlugin::CanLoad(const std::filesystem::path& filepath) const
+    bool TIMSTextureLoaderPlugin::CanLoad(const std::filesystem::path& filepath) const
     {
         return filepath.extension() == ".png" ||
                filepath.extension() == ".jpg" ||
                filepath.extension() == ".jpeg";
     }
 
-    Ref<Texture> TIMSAssetLoaderPlugin::LoadTexture(const std::filesystem::path& filepath)
+    Ref<Texture> TIMSTextureLoaderPlugin::LoadTexture(const std::filesystem::path& filepath)
     {
         // Load texture with stbimg
         int width, height, channels;

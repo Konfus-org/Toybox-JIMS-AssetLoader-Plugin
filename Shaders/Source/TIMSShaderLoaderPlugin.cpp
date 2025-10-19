@@ -16,7 +16,7 @@ namespace Tbx::Plugins::JIMS
                filepath.extension() == ".frag";
     }
 
-    Ref<Shader> TIMSAssetLoaderPlugin::LoadShader(const std::filesystem::path& filepath)
+    Ref<Shader> TIMSShaderLoaderPlugin::LoadShader(const std::filesystem::path& filepath)
     {
         // Get shader type from extension
         ShaderType shaderType;
@@ -46,9 +46,9 @@ namespace Tbx::Plugins::JIMS
         std::string shaderSource;
         {
             std::ostringstream shaderFileContent;
-            contents << file.rdbuf();
+            shaderFileContent << file.rdbuf();
             file.close();
-            shaderSource = contents.str();
+            shaderSource = shaderFileContent.str();
         }
         if (shaderSource.empty())
         {

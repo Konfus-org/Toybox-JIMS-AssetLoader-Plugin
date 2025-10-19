@@ -10,11 +10,7 @@ namespace Tbx::Plugins::JIMS
     };
 
     class TIMSTextLoaderPlugin final
-        : public ITextureLoader
-        , public IShaderLoader
-        , public ITextLoader
-        , public FactoryPlugin<TIMSTexture>
-        , public FactoryPlugin<TIMSShader>
+        : public ITextLoader
         , public FactoryPlugin<TIMSText>
     {
     public:
