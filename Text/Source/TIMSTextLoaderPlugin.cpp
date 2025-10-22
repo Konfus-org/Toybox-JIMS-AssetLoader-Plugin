@@ -6,7 +6,7 @@
 #include <iostream>
 #include <cstring>
 
-namespace Tbx::Plugins::JIMS
+namespace Tbx::Plugins::TIMS
 {
     /////////////// LOADER /////////////////////
 
@@ -20,7 +20,7 @@ namespace Tbx::Plugins::JIMS
         auto file = std::ifstream(filepath, std::ios::in | std::ios::binary);
         if (!file)
         {
-            TBX_ASSERT(false, "JIMS: Failed to load text file at {}!", filepath.string());
+            TBX_ASSERT(false, "TIMS: Failed to load text file at {}!", filepath.string());
             return {};
         }
 

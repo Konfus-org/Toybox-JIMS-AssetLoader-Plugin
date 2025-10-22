@@ -6,7 +6,7 @@
 #include <iostream>
 #include <cstring>
 
-namespace Tbx::Plugins::JIMS
+namespace Tbx::Plugins::TIMS
 {
     /////////////// LOADER /////////////////////
 
@@ -30,7 +30,7 @@ namespace Tbx::Plugins::JIMS
         }
         else
         {
-            TBX_ASSERT(false, "JIMS: Invalid shader file extension at {}!", filepath.string());
+            TBX_ASSERT(false, "TIMS: Invalid shader file extension at {}!", filepath.string());
             return nullptr;
         }
 
@@ -38,7 +38,7 @@ namespace Tbx::Plugins::JIMS
         auto file = std::ifstream(filepath, std::ios::in | std::ios::binary);
         if (!file)
         {
-            TBX_ASSERT(false, "JIMS: Failed to load text file at {}!", filepath.string());
+            TBX_ASSERT(false, "TIMS: Failed to load text file at {}!", filepath.string());
             return {};
         }
 
@@ -52,12 +52,12 @@ namespace Tbx::Plugins::JIMS
         }
         if (shaderSource.empty())
         {
-            TBX_ASSERT(false, "JIMS: Failed to load shader file at {}!", filepath.string());
+            TBX_ASSERT(false, "TIMS: Failed to load shader file at {}!", filepath.string());
             return nullptr;
         }
 
         // Create tbx in memory shader and return it
-        auto shader = FactoryPlugin<TIMSShader>::Create(shaderSource, shaderType);
+        auto shader = Create(shaderSource, shaderType);
         return shader;
     }
 }

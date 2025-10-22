@@ -2,7 +2,7 @@
 #include "Tbx/Plugins/Plugin.h"
 #include "Tbx/Assets/AssetLoaders.h"
 
-namespace Tbx::Plugins::JIMS
+namespace Tbx::Plugins::TIMS
 {
     struct TIMSShader : public Shader, public IProductOfPluginFactory
     {
@@ -10,8 +10,8 @@ namespace Tbx::Plugins::JIMS
     };
 
     class TIMSShaderLoaderPlugin final
-        : public IShaderLoader
-        , public FactoryPlugin<TIMSShader>
+        : public FactoryPlugin<TIMSShader>
+        , public IShaderLoader
     {
     public:
         TIMSShaderLoaderPlugin(Ref<EventBus> eventBus) {}

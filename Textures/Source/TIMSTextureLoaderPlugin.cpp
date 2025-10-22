@@ -1,12 +1,8 @@
 #include "TIMSTextureLoaderPlugin.h"
 #include "Tbx/Debug/Asserts.h"
 #include <stb_image.h>
-#include <fstream>
-#include <sstream>
-#include <iostream>
-#include <cstring>
 
-namespace Tbx::Plugins::JIMS
+namespace Tbx::Plugins::TIMS
 {
     /////////////// LOADER /////////////////////
 
@@ -27,7 +23,7 @@ namespace Tbx::Plugins::JIMS
         // Ensure texture loaded correctly
         if (!data)
         {
-            TBX_ASSERT(false, "JIMS: Failed to load texture file at {}!", filepath.string());
+            TBX_ASSERT(false, "TIMS: Failed to load texture file at {}!", filepath.string());
             return nullptr;
         }
 
@@ -37,7 +33,7 @@ namespace Tbx::Plugins::JIMS
         std::memcpy(pixelData.data(), data, dataSize);
 
         // Create tbx in memory texture and return it
-        auto texture = FactoryPlugin<TIMSTexture>::Create(
+        auto texture = Create(
             Size(width, height),
             TextureWrap::Repeat,
             TextureFilter::Nearest,

@@ -2,7 +2,7 @@
 #include "Tbx/Plugins/Plugin.h"
 #include "Tbx/Assets/AssetLoaders.h"
 
-namespace Tbx::Plugins::JIMS
+namespace Tbx::Plugins::TIMS
 {
     struct TIMSTexture : public Texture, public IProductOfPluginFactory
     {
@@ -10,8 +10,8 @@ namespace Tbx::Plugins::JIMS
     };
 
     class TIMSTextureLoaderPlugin final
-        : public ITextureLoader
-        , public FactoryPlugin<TIMSTexture>
+        : public FactoryPlugin<TIMSTexture>
+        , public ITextureLoader
     {
     public:
         TIMSTextureLoaderPlugin(Ref<EventBus> eventBus) {}
