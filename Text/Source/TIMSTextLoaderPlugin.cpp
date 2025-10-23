@@ -10,7 +10,7 @@ namespace Tbx::Plugins::TIMS
 {
     /////////////// LOADER /////////////////////
 
-    bool TIMSTextLoaderPlugin::CanLoad(const std::filesystem::path& filepath) const
+    bool TIMSTextLoaderPlugin::CanLoadText(const std::filesystem::path& filepath) const
     {
         return filepath.extension() == ".txt";
     }

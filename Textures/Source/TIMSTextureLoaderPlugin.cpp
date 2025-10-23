@@ -6,7 +6,7 @@ namespace Tbx::Plugins::TIMS
 {
     /////////////// LOADER /////////////////////
 
-    bool TIMSTextureLoaderPlugin::CanLoad(const std::filesystem::path& filepath) const
+    bool TIMSTextureLoaderPlugin::CanLoadTexture(const std::filesystem::path& filepath) const
     {
         return filepath.extension() == ".png" ||
                filepath.extension() == ".jpg" ||

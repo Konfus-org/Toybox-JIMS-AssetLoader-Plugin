@@ -15,7 +15,7 @@ namespace Tbx::Plugins::TIMS
     {
     public:
         TIMSTextureLoaderPlugin(Ref<EventBus> eventBus) {}
-        bool CanLoad(const std::filesystem::path& filepath) const final;
+        bool CanLoadTexture(const std::filesystem::path& filepath) const final;
         Ref<Texture> LoadTexture(const std::filesystem::path& filepath) final;
     };
 

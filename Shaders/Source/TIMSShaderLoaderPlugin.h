@@ -15,7 +15,7 @@ namespace Tbx::Plugins::TIMS
     {
     public:
         TIMSShaderLoaderPlugin(Ref<EventBus> eventBus) {}
-        bool CanLoad(const std::filesystem::path& filepath) const final;
+        bool CanLoadShader(const std::filesystem::path& filepath) const final;
         Ref<Shader> LoadShader(const std::filesystem::path& filepath) final;
     };
 

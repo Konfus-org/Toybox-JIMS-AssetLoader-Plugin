@@ -15,7 +15,7 @@ namespace Tbx::Plugins::TIMS
     {
     public:
         TIMSTextLoaderPlugin(Ref<EventBus> eventBus) {}
-        bool CanLoad(const std::filesystem::path& filepath) const final;
+        bool CanLoadText(const std::filesystem::path& filepath) const final;
         Ref<Text> LoadText(const std::filesystem::path& filepath) final;
     };
 

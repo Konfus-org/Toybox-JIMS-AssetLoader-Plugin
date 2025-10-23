@@ -10,7 +10,7 @@ namespace Tbx::Plugins::TIMS
 {
     /////////////// LOADER /////////////////////
 
-    bool TIMSShaderLoaderPlugin::CanLoad(const std::filesystem::path& filepath) const
+    bool TIMSShaderLoaderPlugin::CanLoadShader(const std::filesystem::path& filepath) const
     {
         return filepath.extension() == ".vert" ||
                filepath.extension() == ".frag";
